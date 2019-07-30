@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>这是父组件</h1>
+    <div> 这里展示子组件传给父组件的值：{{title}}</div>
+    <hr />
+    <el-input v-model="msg" placeholder="这是父组件" size="small" style="width: 200px"/>
+    <hr />
+    <son
+      :msg="msg"
+      @titleChanged="updataTitle">
+    </son>
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import son from './components/son'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    son
+  },
+  data() {
+    return {
+      msg: '',
+      title: ''
+    }
+  },
+  methods: {
+    updataTitle(e) {
+      this.title = e
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
